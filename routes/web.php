@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +19,6 @@ Route::get('/old', function () {
     return view('welcome');
 }); // TODO subject to remove
 Route::get('/', [FrontendController::class, 'index'])->name('homepage');
+Route::get('/login', function () { return view('auth.login');})->name('login');
+Route::post('/!/authenticate', [AuthController::class, 'login']);
+Route::any('/admin', function () { return view('admin.dashboard');})->name('dashboard')/*->middleware('auth')*/;
