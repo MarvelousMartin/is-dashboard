@@ -20,5 +20,5 @@ Route::get('/old', function () {
 }); // TODO subject to remove
 Route::get('/', [FrontendController::class, 'index'])->name('homepage');
 Route::get('/login', function () { return view('auth.login');})->name('login');
-Route::post('/!/authenticate', [AuthController::class, 'login']);
+Route::any('/!/authenticate', [AuthController::class, 'authenticate']);
 Route::any('/admin', function () { return view('admin.dashboard');})->name('dashboard')/*->middleware('auth')*/;
