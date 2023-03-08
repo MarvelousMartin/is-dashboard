@@ -23,6 +23,6 @@ Route::any('/!/add-user', [UserController::class, 'sendUserEmail']);
 Route::any('/!/new-user', [FrontendController::class, 'newUser']);
 Route::any('/!/store-user', [UserController::class, 'storeNewUser']);
 Route::any('/!/authenticate', [AuthController::class, 'authenticate']);
-Route::any('/!/test', [UserController::class, 'store']);
 Route::any('/admin', function () { return view('admin.dashboard');})->name('admin')/*->middleware('auth')*/;
-Route::get('/admin/users', [FrontendController::class, 'showUsers'])->name('users')/*->middleware('auth')*/;
+Route::get('/admin/users', [FrontendController::class, 'showUsers'])->name('admin.users')/*->middleware('auth')*/;
+Route::any('/!/update-user-role', [UserController::class, 'updateUserRole']);

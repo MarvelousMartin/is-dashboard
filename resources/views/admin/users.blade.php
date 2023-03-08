@@ -19,7 +19,32 @@
         @foreach($users as $user)
             <div class="block max-w mb-4 p-6 rounded-lg shadow bg-gray-800">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{$user->name}}</h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400"><i class="fa-regular fa-envelope"></i> <a href="mailto:{{$user->email}}" class="hover:underline">{{$user->email}}</a></p>
+                <div class="flex justify-between">
+                    <div class="flex gap-x-4">
+                        <p class="font-normal text-white"><i class="fa-regular fa-envelope"></i> <a href="mailto:{{$user->email}}" class="hover:underline">{{$user->email}}</a></p>
+                        <p class="font-normal text-white"><i class="fa-solid fa-mobile-screen"></i> <a href="tel:{{$user->telephone}}" class="hover:underline">{{$user->telephone}}</a></p>
+                        <p class="font-normal text-white"><i class="fa-regular fa-address-book"></i> {{$user->address}}, {{$user->country}}</p>
+                    </div>
+                    <div class="flex gap-x-4 justify-end">
+                        @if(empty($user->role))
+                            <p class="font-bold text-white"><i class="fa-solid fa-certificate"></i>
+                            <form method="post" action="/!/update-user-role">
+                                {{csrf_field()}}
+                                <input type="hidden" name="id" value="{{$user->id}}">
+                                <select id="roles" name="role">
+                                    @foreach(\App\Enums\Role::cases() as $case)
+                                        <option value="{{$case->value}}">{{$case->value}}</option>
+                                    @endforeach
+                                </select>
+                                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
+                            </form>
+                            </p>
+                        @else
+                            <p class="font-bold text-white"><i class="fa-solid fa-certificate"></i> {{$user->role}}</p>
+                        @endif
+                        <p class="font-bold text-white"><i class="fa-solid fa-timeline"></i> {{$user->step}}</p>
+                    </div>
+                </div>
             </div>
         @endforeach
     </div>
