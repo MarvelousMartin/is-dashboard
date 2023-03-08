@@ -10,13 +10,12 @@ class AuthController extends Controller
 {
     public function authenticate(Request $request): RedirectResponse
     {
-        dd($request->all());
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $request->get('remember') === 'on')) {
             $request->session()->regenerate();
 
             return redirect()->intended('dashboard');

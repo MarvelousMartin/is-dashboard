@@ -9,6 +9,7 @@
         "filament/filament": "^2.17",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^10.0",
+        "laravel/pint": "^1.6",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.5"
     },
