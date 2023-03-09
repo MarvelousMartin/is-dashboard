@@ -23,21 +23,16 @@ class UserController extends Controller
     {
         $user = new User();
 
-        $user->name = $request->get('name');
         $user->email = $request->get('email');
+        $user->name = $request->get('name');
         $user->password = bcrypt($request->get('password'));
-        $user->address = $request->get('address');
+        $user->address = $request->get('street-address').', '.$request->get('postal-code').' '.$request->get('city').', '.$request->get('state');
         $user->telephone = $request->get('telephone');
         $user->country = $request->get('country');
         $user->role = null;
         $user->step = ClientStep::REGISTERED->value;
 
         $user->save();
-
-        User::create([
-            'name' => $request->get('name'),
-            'password' => bcrypt($request->get('password')),
-        ]);
 
         return redirect()->route('login')->with('success', 'You have enrolled successfully!');
     }

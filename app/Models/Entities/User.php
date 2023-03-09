@@ -14,16 +14,6 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model implements Authenticatable
 {
     use HasFactory;use AuthenticableTrait;
-    protected $fillable = [
-        'id',
-        'name',
-        'email',
-        'password',
-        'telephone',
-        'address',
-        'country',
-        'role',
-        'step',
-    ];
+    protected $guarded = [];
 
 }

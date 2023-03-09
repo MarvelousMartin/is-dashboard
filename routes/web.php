@@ -31,3 +31,6 @@ Route::get('/admin/users', [FrontendController::class, 'showUsers'])->name('admi
 Route::any('/admin/users/verify', [UserController::class, 'verifyUser']);
 
 Route::any('/dashboard', function () { return view('dashboard');})->name('dashboard')->middleware('auth');
+
+
+Route::redirect('/admin/archive', url()->full(), 301);
