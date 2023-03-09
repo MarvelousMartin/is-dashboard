@@ -18,11 +18,14 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', function () { return view('welcome');});
 Route::get('/login', function () { return view('auth.login');})->name('login');
-Route::get('/admin/register', function () { return view('auth.register');})->name('register');
+Route::any('/!/authenticate', [AuthController::class, 'authenticate']);
+
 Route::any('/!/add-user', [UserController::class, 'sendUserEmail']);
 Route::any('/!/new-user', [FrontendController::class, 'newUser']);
 Route::any('/!/store-user', [UserController::class, 'storeNewUser']);
-Route::any('/!/authenticate', [AuthController::class, 'authenticate']);
-Route::any('/admin', function () { return view('admin.dashboard');})->name('admin')/*->middleware('auth')*/;
-Route::get('/admin/users', [FrontendController::class, 'showUsers'])->name('admin.users')/*->middleware('auth')*/;
 Route::any('/!/update-user-role', [UserController::class, 'updateUserRole']);
+
+Route::any('/admin', function () { return view('admin.dashboard');})->name('dashboard')->middleware('auth');
+Route::get('/admin/register', function () { return view('auth.register');})->name('admin.register')->middleware('auth');
+Route::get('/admin/users', [FrontendController::class, 'showUsers'])->name('admin.users')->middleware('auth');
+Route::any('/admin/users/verify', [UserController::class, 'verifyUser']);

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('country');
             $table->string('role')->nullable();
-            $table->string('step')->nullable();
+            $table->string('step');
             $table->timestamps();
         });
     }
