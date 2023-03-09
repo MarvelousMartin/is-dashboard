@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
      */
 class User extends Model implements Authenticatable
 {
-    use HasFactory, AuthenticableTrait;
+    use HasFactory;use AuthenticableTrait;
     protected $fillable = [
         'id',
         'name',

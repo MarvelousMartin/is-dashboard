@@ -18,7 +18,7 @@
 <div class="p-4 sm:ml-64">
     <div class="p-4">
         @foreach($users as $user)
-            <div class="block max-w rounded-lg shadow bg-gray-800">
+            <div class="block max-w rounded-lg shadow bg-gray-800 mb-4">
                 <div class="flex gap-x-4">
                     @if($user->step === \App\Enums\ClientStep::REGISTERED->value)
                         <div class="my-auto pl-4">

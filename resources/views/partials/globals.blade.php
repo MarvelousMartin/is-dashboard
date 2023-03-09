@@ -1,2 +1,1 @@
-{{$isSuper = Auth::user()->role === \App\Enums\Role::ADMIN}}
-{{dd($isSuper)}}
+@php $isSuper = Auth::user()->role === \App\Enums\Role::ADMIN->value @endphp
