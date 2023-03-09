@@ -11,7 +11,7 @@ class FrontendController extends Controller
     public function newUser(Request $request): View
     {
         $email = $request->get('email');
-        return view('auth.newUser', [
+        return view('newUser', [
             'email' => $email
         ]);
     }

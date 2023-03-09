@@ -21,12 +21,6 @@ class UserController extends Controller
 
     public function storeNewUser(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:8',
-        ]);
-
         $user = new User();
 
         $user->name = $request->get('name');
@@ -35,10 +29,15 @@ class UserController extends Controller
         $user->address = $request->get('address');
         $user->telephone = $request->get('telephone');
         $user->country = $request->get('country');
-        $this->role = null;/*Role::CLIENT->getTitle();*/
-        $this->step = ClientStep::REGISTERED->value;
+        $user->role = null;
+        $user->step = ClientStep::REGISTERED->value;
 
         $user->save();
+
+        User::create([
+            'name' => $request->get('name'),
+            'password' => bcrypt($request->get('password')),
+        ]);
 
         return redirect()->route('login')->with('success', 'You have enrolled successfully!');
     }
@@ -50,5 +49,14 @@ class UserController extends Controller
         $user->save();
 
         return redirect(route('admin.users'))->with('success', 'User role updated successfully!');
+    }
+
+    public function verifyUser(Request $request)
+    {
+        $user = User::find($request->get('id'));
+        $user->step = ClientStep::VERIFIED->value;
+        $user->save();
+
+        return redirect(route('admin.users'))->with('success', 'User verified successfully!');
     }
 }
