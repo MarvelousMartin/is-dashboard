@@ -33,4 +33,4 @@ Route::any('/admin/users/verify', [UserController::class, 'verifyUser']);
 Route::any('/dashboard', function () { return view('dashboard');})->name('dashboard')->middleware('auth');
 
 
-Route::redirect('/admin/archive', url()->full(), 301);
+Route::redirect('/admin/archive', \Illuminate\Support\Facades\URL::to('admin'), 301);
