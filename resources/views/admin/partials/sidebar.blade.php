@@ -22,7 +22,7 @@
                 <a href="/admin/users" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                     <i class="fa-solid fa-users"></i>
                     <span class="flex-1 ml-3 whitespace-nowrap">Users</span>
-                    <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium rounded-full bg-pink-600 text-white">{{\Illuminate\Support\Facades\DB::table('users')->count()}}</span>
+                    <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium rounded-full bg-pink-600 text-white">{{\Illuminate\Support\Facades\DB::table('users')->where('role', 'not like', 'admin')->count()}}</span>
                 </a>
             </li>
             <li>
