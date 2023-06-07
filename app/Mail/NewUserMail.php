@@ -8,7 +8,8 @@ use Illuminate\Queue\SerializesModels;
 
 class NewUserMail extends Mailable
 {
-    use Queueable;use SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     public string $email;
 

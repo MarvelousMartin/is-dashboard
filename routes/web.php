@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\UserController;
@@ -16,21 +17,20 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () { return view('welcome');});
-Route::get('/login', function () { return view('auth.login');})->name('login');
-Route::any('/!/authenticate', [AuthController::class, 'authenticate']);
+Route::get('/', function () { return view('admin.dashboard');});
+Route::get('login', function () { return view('auth.login');})->name('login');
+Route::any('authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
 
-Route::any('/!/add-user', [UserController::class, 'sendUserEmail']);
-Route::any('/!/new-user', [FrontendController::class, 'newUser']);
-Route::any('/!/store-user', [UserController::class, 'storeNewUser']);
-Route::any('/!/update-user-role', [UserController::class, 'updateUserRole']);
+Route::any('add-user', [UserController::class, 'sendUserEmail'])->name('add-user');
+Route::any('new-user', [FrontendController::class, 'newUser'])->name('new-user');
+Route::any('store-user', [UserController::class, 'storeNewUser'])->name('store-user');
+Route::any('update-user-role', [UserController::class, 'updateUserRole'])->name('update-user-role');
 
-Route::any('/admin', function () { return view('admin.dashboard');})->name('admin.dashboard')->middleware('auth');
-Route::get('/admin/register', function () { return view('auth.register');})->name('admin.register')->middleware('auth');
-Route::get('/admin/users', [FrontendController::class, 'showUsers'])->name('admin.users')->middleware('auth');
-Route::any('/admin/users/verify', [UserController::class, 'verifyUser']);
+Route::any('admin', [AdminController::class, 'admin'])->name('admin.dashboard')->middleware('auth');
+Route::get('admin/register', [AdminController::class, 'register'])->name('admin.register')->middleware('auth');
+Route::get('admin/timeline', [AdminController::class, 'timeline'])->name('admin.timeline')->middleware('auth');
+Route::get('admin/calendar', [AdminController::class, 'calendar'])->name('admin.calendar')->middleware('auth');
+Route::get('admin/users', [FrontendController::class, 'showUsers'])->name('admin.users')->middleware('auth');
+Route::any('admin/users/verify', [UserController::class, 'verifyUser'])->name('admin.users.verify')->middleware('auth');
 
-Route::any('/dashboard', function () { return view('dashboard');})->name('dashboard')->middleware('auth');
-
-
-Route::redirect('/admin/archive', \Illuminate\Support\Facades\URL::to('admin'), 301);
+Route::redirect('admin/archive', 'admin', 301)->name('admin.archive')->middleware('auth');

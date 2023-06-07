@@ -16,7 +16,7 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials, $request->get('remember') === 'on')) {
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
             if (Auth::user()->role === Role::ADMIN->value) {
@@ -24,10 +24,8 @@ class AuthController extends Controller
             } else {
                 return redirect()->route('login');
             }
+        } else {
+            return back()->with('error', 'The provided credentials do not match our records.');
         }
-
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
     }
 }

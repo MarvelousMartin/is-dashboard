@@ -16,11 +16,12 @@ class UserController extends Controller
         $email = $request->get('email');
         Mail::to($email)->send(new NewUserMail($email));
 
-        return redirect()->route('register')->with('success', 'Email sent successfully!');
+        return to_route('admin.dashboard')->with('success', 'Email sent successfully!');
     }
 
     public function storeNewUser(Request $request): RedirectResponse
     {
+        dd($request->all());
         $user = new User();
 
         $user->email = $request->get('email');

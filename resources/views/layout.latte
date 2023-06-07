@@ -1,0 +1,40 @@
+{var $isSuper = Auth::user()->role === \App\Enums\Role::ADMIN->value}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="title" content="Inclusive Surrogacy Client Dashboard">
+    <meta name="description" content="Inclusive Surrogacy San Antonio, TX">
+    <title>Inclusive Surrogacy</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+    <script n:syntax="off">
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', '');
+    </script>
+
+    <!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="{asset('favicon.ico')}"/>
+
+    <!-- ===== All CSS files ===== -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    {block head}{/block}
+</head>
+<body>
+
+{include content}
+
+</body>
+{include 'partials/_alert.latte'}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+{block bottomscripts}{/block}
+</html>
